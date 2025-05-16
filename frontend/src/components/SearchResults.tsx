@@ -49,13 +49,15 @@ export function SearchResults({
   const [extractionTimeout, setExtractionTimeout] = useState(false);
 
   // Add timeout for extraction
+  // Reset the timer whenever new results are loaded
   useEffect(() => {
+    setExtractionTimeout(false);
     const timer = setTimeout(() => {
       setExtractionTimeout(true);
     }, 10000);  // 10 seconds
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [results]);
 
   // Function to standardize text display 
   const standardizeTextDisplay = (text: string | null | undefined): string => {
